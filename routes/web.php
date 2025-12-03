@@ -18,13 +18,9 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     
-    Route::middleware(['role:admin'])->group(function () {
-        Route::resource('categories', CategoryController::class);
-    });
+    Route::resource('categories', CategoryController::class);
 
-    Route::middleware(['role:admin|editor'])->group(function () {
-        Route::resource('posts', PostController::class);
-    });
+    Route::resource('posts', PostController::class);
 
     
     
