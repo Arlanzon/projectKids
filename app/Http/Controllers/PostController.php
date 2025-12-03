@@ -8,6 +8,14 @@ use Illuminate\Http\Request;
 use App\Http\Requests\StorePostRequest;
 class PostController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permission:posts.view')->only(['index', 'show']);
+        $this->middleware('permission:posts.create')->only(['create', 'store']);
+        $this->middleware('permission:posts.update|posts.update.own')->only(['edit', 'update']);
+        $this->middleware('permission:posts.delete|posts.delete.own')->only(['destroy']);
+    }
+
     /**
      * Display a listing of the resource.
      */
